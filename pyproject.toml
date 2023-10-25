@@ -1,0 +1,47 @@
+[tool.poetry]
+name = "msid-project"
+version = "0.1.0"
+description = "Project for analyzing and building predictions for movie data collected from the TMDB website."
+authors = ["KatsiarynaViarenich <katsiaryna.viarenich@gmail.com>"]
+license = "MIT"
+readme = "README.md"
+packages = [{include = "msid_project"}]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+requests = "^2.31.0"
+poethepoet = "^0.20.0"
+black = "^23.3.0"
+pyflakes = "^3.0.1"
+mypy = "^1.3.0"
+pandas = "^2.0.1"
+jupyter = "^1.0.0"
+catboost = "^1.2"
+xgboost = "^1.7.5"
+lightgbm = "^3.3.5"
+typer = "^0.9.0"
+transformers = "^4.29.2"
+wordcloud = "^1.9.2"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+
+[tool.poe.tasks]
+black = "black --check ./"
+isort = "isort . -c"
+black_fix = "black ./"
+isort_fix = "isort . "
+pyflakes = "pyflakes ./"
+check = ["black", "isort", "pyflakes"]
+fix = ["black_fix", "isort_fix"]
+fix_check = ["fix", "check"]
+
+[tool.black]
+line-length = 100
+
+[tool.isort]
+line_length = 100
+profile = "black"
